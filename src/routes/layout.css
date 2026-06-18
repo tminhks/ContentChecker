@@ -1,0 +1,93 @@
+@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@theme {
+	--font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+
+	--color-bg: #fdfcfa;
+	--color-surface: #ffffff;
+	--color-surface-alt: #f7f6f3;
+	--color-border: #e6e4dc;
+	--color-ink: #191919;
+	--color-ink-muted: #6f6b66;
+	--color-ink-faint: #9b9a97;
+
+	--color-safe: #2f9e58;
+	--color-safe-bg: #e7f6ec;
+	--color-safe-border: #bce5c9;
+
+	--color-caution: #b8860b;
+	--color-caution-bg: #fbf3d9;
+	--color-caution-border: #f1dfa0;
+
+	--color-risk: #c8413b;
+	--color-risk-bg: #fbeae9;
+	--color-risk-border: #f0c2bf;
+
+	--shadow-sm: 0 1px 3px rgba(25, 25, 25, 0.07), 0 1px 2px rgba(25, 25, 25, 0.05);
+	--shadow-md: 0 4px 16px rgba(25, 25, 25, 0.09), 0 2px 6px rgba(25, 25, 25, 0.05);
+	--shadow-lg: 0 20px 48px rgba(25, 25, 25, 0.14), 0 6px 16px rgba(25, 25, 25, 0.07);
+}
+
+body {
+	background-color: var(--color-bg);
+	color: var(--color-ink);
+}
+
+/* ─── Scroll reveal (fade + slide up), used via the `reveal` action ───────── */
+.reveal {
+	opacity: 0;
+	transform: translateY(24px);
+	transition:
+		opacity 600ms ease-out,
+		transform 600ms ease-out;
+}
+
+.reveal.reveal-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* ─── Native page transition (View Transitions API, triggered via onNavigate
+     in each +page.svelte — no JS animation library, no layout.svelte edit) ── */
+@media not (prefers-reduced-motion: reduce) {
+	::view-transition-old(root) {
+		animation:
+			220ms ease-out both page-fade-out,
+			220ms ease-out both page-slide-out;
+	}
+	::view-transition-new(root) {
+		animation:
+			280ms ease-out both page-fade-in,
+			280ms ease-out both page-slide-in;
+	}
+}
+
+@keyframes page-fade-out {
+	to {
+		opacity: 0;
+	}
+}
+@keyframes page-fade-in {
+	from {
+		opacity: 0;
+	}
+}
+@keyframes page-slide-out {
+	to {
+		transform: translateY(-8px);
+	}
+}
+@keyframes page-slide-in {
+	from {
+		transform: translateY(8px);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.reveal {
+		opacity: 1;
+		transform: none;
+		transition: none;
+	}
+}
