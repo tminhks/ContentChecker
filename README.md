@@ -1,42 +1,45 @@
-# sv
+# Content Checker
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Web app demo giúp kiểm tra video/ảnh có vi phạm bản quyền hoặc rủi ro pháp lý (Nghị định 72, Luật An ninh mạng) trước khi đăng lên mạng xã hội.
 
-## Creating a project
+Đây là bản demo frontend — kết quả phân tích là dữ liệu cố định (mock), chưa nối với AI/backend thật.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Tech stack
 
-```sh
-# create a new project
-npx sv create my-app
-```
+- [SvelteKit](https://svelte.dev/docs/kit) (Svelte 5) + TypeScript
+- [Tailwind CSS](https://tailwindcss.com) v4
+- [Drizzle ORM](https://orm.drizzle.team) + Cloudflare D1 (đã cấu hình sẵn nhưng **chưa được dùng thật** trong code — toàn bộ flow demo chạy bằng mock data trong `src/lib/mock-results.ts`, không cần database để chạy local)
 
-To recreate this project with the same configuration:
+## Routes
 
-```sh
-# recreate this project
-npx sv@0.16.1 create --template minimal --types ts --add prettier eslint sveltekit-adapter="adapter:cloudflare+cfTarget:workers" drizzle="database:d1" tailwindcss="plugins:none" --install npm PankPlace
-```
+- `/` — landing page
+- `/demo` — chọn loại nội dung cần kiểm tra
+- `/demo/video` — demo phân tích video (upload, toggle audio/transcript, kết quả "AN TOÀN" cố định)
+- `/demo/image` — demo phân tích ảnh + caption
 
-## Developing
+## Chạy local
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
+Yêu cầu: Node.js 18+ và [pnpm](https://pnpm.io) (khuyến nghị) hoặc npm/yarn.
 
 ```sh
-npm run build
+pnpm install
+pnpm dev
 ```
 
-You can preview the production build with `npm run preview`.
+Mở [http://localhost:5173](http://localhost:5173). **Không cần** tạo file `.env` hay xin Cloudflare credentials gì — database chưa được wire vào code nên project chạy được ngay sau `pnpm install`.
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+## Kiểm tra code trước khi commit
+
+```sh
+pnpm check   # type-check
+pnpm lint    # prettier + eslint
+```
+
+## Build
+
+```sh
+pnpm build
+pnpm preview
+```
+
+> Project dùng [adapter Cloudflare Workers](https://svelte.dev/docs/kit/adapters) để deploy — nếu chỉ chạy local thì không cần quan tâm bước này.
