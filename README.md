@@ -4,11 +4,17 @@ Web app demo giúp kiểm tra video/ảnh có vi phạm bản quyền hoặc r�
 
 Đây là bản demo frontend — kết quả phân tích là dữ liệu cố định (mock), chưa nối với AI/backend thật.
 
+## Trạng thái dự án
+
+Repo này được công khai **chỉ để phục vụ việc đánh giá hồ sơ/proposal**, không phải để clone về chạy thử. Bản demo đầy đủ (giao diện, luồng phân tích, kết quả) được trình bày qua **video demo** đã gửi kèm proposal.
+
+Mã nguồn và toàn bộ nội dung trong repo thuộc bản quyền của tác giả — xem [LICENSE](LICENSE). Việc tải, sao chép, build hoặc triển khai lại dưới bất kỳ hình thức nào đều cần được tác giả đồng ý trước.
+
 ## Tech stack
 
 - [SvelteKit](https://svelte.dev/docs/kit) (Svelte 5) + TypeScript
 - [Tailwind CSS](https://tailwindcss.com) v4
-- [Drizzle ORM](https://orm.drizzle.team) + Cloudflare D1 (đã cấu hình sẵn nhưng **chưa được dùng thật** trong code — toàn bộ flow demo chạy bằng mock data trong `src/lib/mock-results.ts`, không cần database để chạy local)
+- [Drizzle ORM](https://orm.drizzle.team) + Cloudflare D1 (đã cấu hình sẵn nhưng chưa được dùng thật trong code)
 
 ## Routes
 
@@ -17,29 +23,6 @@ Web app demo giúp kiểm tra video/ảnh có vi phạm bản quyền hoặc r�
 - `/demo/video` — demo phân tích video (upload, toggle audio/transcript, kết quả "AN TOÀN" cố định)
 - `/demo/image` — demo phân tích ảnh + caption
 
-## Chạy local
+## Liên hệ
 
-Yêu cầu: Node.js 18+ và [pnpm](https://pnpm.io) (khuyến nghị) hoặc npm/yarn.
-
-```sh
-pnpm install
-pnpm dev
-```
-
-Mở [http://localhost:5173](http://localhost:5173). **Không cần** tạo file `.env` hay xin Cloudflare credentials gì — database chưa được wire vào code nên project chạy được ngay sau `pnpm install`.
-
-## Kiểm tra code trước khi commit
-
-```sh
-pnpm check   # type-check
-pnpm lint    # prettier + eslint
-```
-
-## Build
-
-```sh
-pnpm build
-pnpm preview
-```
-
-> Project dùng [adapter Cloudflare Workers](https://svelte.dev/docs/kit/adapters) để deploy — nếu chỉ chạy local thì không cần quan tâm bước này.
+Mọi câu hỏi về dự án, vui lòng liên hệ trực tiếp tác giả qua kênh đã trao đổi cùng proposal.
